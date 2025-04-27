@@ -1,10 +1,10 @@
-/* eslint-disable no-unused-vars */
-
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import emailjs from '@emailjs/browser';
 import { LuMapPin } from "react-icons/lu";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { FiPhone } from "react-icons/fi";
+import Header from "../components/header";
+import Footer from "../components/Footer";
 
 const Contact = () => {
   const form = useRef();
@@ -12,13 +12,18 @@ const Contact = () => {
   const sendEmail = (e) => {
     e.preventDefault();
 
+    if (!form.current) {
+      alert('Form reference not found.');
+      return;
+    }
+
     emailjs.sendForm(
-      'service_4icfaac',      
-      'template_a3lqulf',     
+      'service_4icfaac',
+      'template_a3lqulf',
       form.current,
-      '3IJfpOD0eHNgGiZqJ'      
+      '3IJfpOD0eHNgGiZqJ'
     )
-    .then((result) => {
+    .then(() => {
       alert('Message sent successfully!');
       e.target.reset();
     }, (error) => {
@@ -28,18 +33,20 @@ const Contact = () => {
   };
 
   return (
+    <>
+    <Header />
     <div className="max-w-7xl mx-auto px-2 py-8">
       <h1 className="text-4xl font-bold text-gray-800 mb-6 flex justify-center">Contact Us</h1>
-      
+
       <div className="grid md:grid-cols-2 gap-8">
         <div className="bg-white p-6 rounded-lg">
           <h2 className="text-3xl font-semibold text-black mb-4">Get in Touch</h2>
           <form ref={form} onSubmit={sendEmail}>
             <div className="mb-4">
               <label htmlFor="name" className="block font-semibold text-gray-700 mb-2">Name</label>
-              <input 
-                type="text" 
-                id="name" 
+              <input
+                type="text"
+                id="name"
                 name="user_name"
                 className="w-full px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
                 required
@@ -47,9 +54,9 @@ const Contact = () => {
             </div>
             <div className="mb-4">
               <label htmlFor="email" className="block font-semibold text-gray-700 mb-2">Email</label>
-              <input 
-                type="email" 
-                id="email" 
+              <input
+                type="email"
+                id="email"
                 name="user_email"
                 className="w-full px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
                 required
@@ -57,16 +64,16 @@ const Contact = () => {
             </div>
             <div className="mb-4">
               <label htmlFor="message" className="block font-semibold text-gray-700 mb-2">Message</label>
-              <textarea 
-                id="message" 
+              <textarea
+                id="message"
                 name="message"
-                rows="4" 
+                rows="4"
                 className="w-full px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
                 required
               ></textarea>
             </div>
-            <button 
-              type="submit" 
+            <button
+              type="submit"
               className="bg-blue-600 text-white px-4 w-full py-2 rounded-md hover:bg-blue-700 transition duration-300"
             >
               Send Message
@@ -112,6 +119,8 @@ const Contact = () => {
         </div>
       </div>
     </div>
+    <Footer />
+    </>
   );
 };
 

@@ -1,40 +1,54 @@
-/* eslint-disable no-unused-vars */
-
-
-import React from 'react';
-import {  FaSearch } from 'react-icons/fa';
+// components/Header.jsx
+import { FaSearch } from 'react-icons/fa';
 import { CiHeart } from "react-icons/ci";
-import { FiShoppingCart } from "react-icons/fi";
-import { FiUser } from "react-icons/fi";
+import { FiShoppingCart, FiUser } from "react-icons/fi";
+import { useCart } from '../components/CartContext';
+import { Link } from 'react-router-dom';
 
-const Header = () => {
+export default function Header() {
+  const { cartItems } = useCart();
+  const totalCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+
   return (
-    <header className="bg-white shadow-md px-40 py-4 flex justify-between items-center sticky top-0 z-50">
-      <div className="flex items-center gap-10">
-        <h1 className="text-2xl font-bold text-gray-900">ShopHub</h1>
-        <nav className="hidden md:flex gap-10 text-black font-medium text-ml mt-1">
-          <a href="#" className="hover:text-gray-700  ">Home</a>
-          <a href="#" className="hover:text-gray-700 ">Categories</a>
-          <a href="#" className="hover:text-gray-700 ">Contact</a>
+    <header className="bg-white shadow-md px-6 md:px-20 py-4 flex justify-between items-center">
+      <div className="flex items-center gap-8">
+        <h1 className="text-2xl font-bold text-gray-900">
+          <Link to="/">ShopHub</Link>
+        </h1>
+        <nav className="hidden md:flex gap-8 text-gray-800">
+          <Link to="/">Home</Link>
+          <Link to="/products">Products</Link>
+          <Link to="/contact">Contact</Link>
         </nav>
       </div>
 
-      <div className="flex items-center gap-8">
-      <div className="flex items-center bg-white outline outline-gray-400 focus-within:outline-2 focus-within:outline-blue-500 rounded-full px-4 py-2">
-  <input
-    type="text"
-    placeholder="Search products..."
-    className="bg-transparent outline-none text-l px-2 w-40 md:w-60"
-  />
-  <FaSearch className="text-gray-500" />
+      <div className="flex items-center gap-6">
+        <div className="relative">
+          <input
+            type="text"
+            placeholder="Search products..."
+            className="w-40 md:w-64 border border-gray-300 rounded-full px-4 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <FaSearch className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
         </div>
-        <CiHeart className="text-4xl text-gray-700 bg-transparent hover:text-black cursor-pointer" />
-<FiShoppingCart className="text-3xl text-gray-700 bg-transparent hover:text-black cursor-pointer" />
-<FiUser className="text-3xl text-gray-700 bg-transparent hover:text-black cursor-pointer" />
 
+        <Link to="/favorites" className="relative text-gray-700 hover:text-black">
+          <CiHeart size={24} />
+        </Link>
+
+        <Link to="/cart" className="relative text-gray-700 hover:text-black">
+          <FiShoppingCart size={24} />
+          {totalCount > 0 && (
+            <span className="absolute -top-2 -right-2 bg-red-600 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center">
+              {totalCount}
+            </span>
+          )}
+        </Link>
+
+        <Link to="/profile" className="text-gray-700 hover:text-black">
+          <FiUser size={24} />
+        </Link>
       </div>
     </header>
   );
-};
-
-export default Header;
+}

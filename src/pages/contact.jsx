@@ -1,10 +1,13 @@
-import Contact from "./components/contact.jsx"
 
-const Communication=()=>{
-    return(
-        <>
-        <Contact/>
-        </>
-    )
-}
-export default Communication ; 
+import Contact from "./components/Contact";
+
+const Communication = () => {
+  return (
+    <>
+    
+      <Contact />
+    </>
+  );
+};
+
+export default Communication;

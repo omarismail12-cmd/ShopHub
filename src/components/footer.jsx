@@ -1,3 +1,4 @@
+
 import { FaFacebookF, FaTwitter, FaInstagram } from "react-icons/fa";
 
 function Footer() {
@@ -10,7 +11,7 @@ function Footer() {
             <p>Your one-stop shop for all your shopping needs.</p>
           </div>
 
-          <div className=" flex flex-col min-w-[150px]">
+          <div className="flex flex-col min-w-[150px]">
             <h4 className="text-white mb-4 text-lg font-semibold">
               Quick Links
             </h4>
