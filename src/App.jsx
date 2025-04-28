@@ -9,6 +9,7 @@ import { CartProvider } from "./components/CartContext";
 
 
 function App() {
+  
   return (
     <FavoriteProvider>
       <CartProvider>
