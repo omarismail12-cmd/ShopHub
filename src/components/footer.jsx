@@ -64,7 +64,7 @@ function Footer() {
         <hr className="border-t border-slate-700 my-8" />
 
         <div className="text-center text-sm">
-          © 2024 ShopHub. All rights reserved.
+          © 2025 ShopHub. All rights reserved.
         </div>
       </footer>
     </section>

@@ -1,4 +1,4 @@
-
+// components/FeaturedProducts.jsx
 import { CiHeart } from "react-icons/ci";
 import { AiFillHeart } from "react-icons/ai";
 import { Link } from "react-router-dom";
@@ -8,8 +8,11 @@ import { initialProducts } from "../lib/data";
 
 export default function FeaturedProducts() {
   const featured = initialProducts.slice(0, 4);
-  const { addToCart } = useCart();
+  const { addToCart, increaseQuantity, cartItems } = useCart();
   const { addToFavorites, removeFromFavorites, isFavorited } = useFavorite();
+
+  // helper to know if item is already in cart
+  const isInCart = (id) => cartItems.some(item => item.id === id);
 
   return (
     <section className="bg-gray-50 py-12">
@@ -20,6 +23,8 @@ export default function FeaturedProducts() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {featured.map((product) => {
             const fav = isFavorited(product.id);
+            const inCart = isInCart(product.id);
+
             return (
               <div
                 key={product.id}
@@ -44,7 +49,7 @@ export default function FeaturedProducts() {
                 >
                   {fav
                     ? <AiFillHeart className="w-6 h-6 text-red-500" />
-                    : <CiHeart     className="w-6 h-6 text-gray-400 hover:text-gray-600" />
+                    : <CiHeart className="w-6 h-6 text-gray-400 hover:text-gray-600" />
                   }
                 </button>
 
@@ -54,10 +59,18 @@ export default function FeaturedProducts() {
                   <div className="mt-3 flex justify-between items-center">
                     <span className="text-lg font-bold">${product.price}</span>
                     <button
-                      onClick={() => addToCart(product)}
-                      className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition"
+                      onClick={() =>
+                        inCart
+                          ? increaseQuantity(product.id)
+                          : addToCart(product, 1)
+                      }
+                      className={`px-4 py-2 rounded-md text-white transition ${
+                        inCart
+                          ? "bg-green-600 hover:bg-green-700"
+                          : "bg-blue-600 hover:bg-blue-700"
+                      }`}
                     >
-                      Add to Cart
+                      {inCart ? "Add One More" : "Add to Cart"}
                     </button>
                   </div>
                 </div>

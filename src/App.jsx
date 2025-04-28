@@ -7,22 +7,6 @@ import Contact from "./components/contact";
 import { FavoriteProvider } from "./components/favoriteContext";
 import { CartProvider } from "./components/CartContext";
 
-// const Navigation = () => {
-//   return (
-//     <nav className="p-4 bg-gray-800 text-white">
-//       <div className="flex items-center justify-between">
-//         <h1 className="text-xl font-semibold">ShopHub</h1>
-//         <div className="md:flex">
-//           <NavLink to="/" className={({isActive}) => isActive ? "text-blue-500 p-2" : "hover:text-gray-400 p-2"}>Home</NavLink>
-//           <NavLink to="/products" className={({isActive}) => isActive ? "text-blue-500 p-2" : "hover:text-gray-400 p-2"}>Products</NavLink>
-//           <NavLink to="/favorites" className={({isActive}) => isActive ? "text-blue-500 p-2" : "hover:text-gray-400 p-2"}>Favorites</NavLink>
-//           <NavLink to="/cart" className={({isActive}) => isActive ? "text-blue-500 p-2" : "hover:text-gray-400 p-2"}>Cart</NavLink>
-//           <NavLink to="/contact" className={({isActive}) => isActive ? "text-blue-500 p-2" : "hover:text-gray-400 p-2"}>Contact</NavLink>
-//         </div>
-//       </div>
-//     </nav>
-//   );
-// };
 
 function App() {
   return (

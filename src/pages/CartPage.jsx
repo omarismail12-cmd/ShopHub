@@ -1,3 +1,4 @@
+// pages/CartPage.jsx
 import { useCart } from '../components/CartContext';
 import Header from '../components/header';
 import Footer from '../components/Footer';
@@ -8,7 +9,14 @@ import {
 } from 'react-icons/ai';
 
 export default function CartPage() {
-  const { cartItems, addToCart, removeFromCart, clearCart, total } = useCart();
+  const {
+    cartItems,
+    increaseQuantity,
+    decreaseQuantity,
+    removeFromCart,
+    clearCart,
+    total
+  } = useCart();
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -19,7 +27,7 @@ export default function CartPage() {
           cartItems.length > 0 ? 'grid-cols-1 lg:grid-cols-3' : ''
         }`}>
 
-          {/* Left column: cart items or empty state */}
+          {/* Cart Items or Empty State */}
           <div className={`${cartItems.length > 0
               ? 'lg:col-span-2 space-y-6'
               : 'flex flex-col items-center justify-center min-h-[60vh] text-center'}`}>
@@ -53,7 +61,7 @@ export default function CartPage() {
                   <div className="mt-4 flex items-center space-x-4">
                     {/* Decrease */}
                     <button
-                      onClick={() => removeFromCart(item.id)}
+                      onClick={() => decreaseQuantity(item.id)}
                       aria-label="Decrease quantity"
                       className="text-gray-600 hover:text-gray-800"
                     >
@@ -64,25 +72,16 @@ export default function CartPage() {
 
                     {/* Increase */}
                     <button
-                      onClick={() => addToCart(
-                        {
-                          id: item.id,
-                          name: item.name,
-                          description: item.description,
-                          image_url: item.image_url,
-                          price: item.price
-                        },
-                        1
-                      )}
+                      onClick={() => increaseQuantity(item.id)}
                       aria-label="Increase quantity"
                       className="text-gray-600 hover:text-gray-800"
                     >
                       <AiFillPlusCircle size={20} />
                     </button>
 
-                    {/* Remove completely */}
+                    {/* Remove Completely */}
                     <button
-                      onClick={() => removeFromCart(item.id) /* you could also write a `removeAllFromCart` if you want */}
+                      onClick={() => removeFromCart(item.id)}
                       aria-label="Remove item"
                       className="ml-auto text-red-500 hover:text-red-700"
                     >
@@ -100,7 +99,7 @@ export default function CartPage() {
 
           </div>
 
-          {/* Right column: order summary */}
+          {/* Order Summary */}
           {cartItems.length > 0 && (
             <aside className="bg-white rounded-lg shadow-md p-6 h-max sticky top-28">
               <h2 className="text-2xl font-bold mb-4">Order Summary</h2>

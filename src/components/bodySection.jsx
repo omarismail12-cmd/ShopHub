@@ -8,7 +8,7 @@ const BodySection = () => {
         backgroundImage: `linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1441986300917-64674bd600d8')`,
       }}
     >
-      <div className="bg-opacity-50 p-2 rounded-lg text-left pl-40">
+      <div className="bg-opacity-50 p-2  text-left pl-40">
         <h1 className="text-4xl md:text-6xl font-bold mb-4">Welcome to ShopHub</h1>
         <p className="text-xl md:text-2xl mb-8">Discover amazing products at great prices</p>
         <Link to='./products' className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg text-lg font-semibold flex items-center w-60 justify-center">

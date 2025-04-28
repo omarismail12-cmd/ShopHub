@@ -1,3 +1,4 @@
+// components/CartContext.js
 import { createContext, useState, useContext, useMemo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
@@ -5,22 +6,19 @@ const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState(() => {
-    // Check if there's already data in localStorage
-    const storedCart = localStorage.getItem('cart');
-    return storedCart ? JSON.parse(storedCart) : []; // If there's data, parse and use it, otherwise default to empty array
+    const stored = localStorage.getItem('cart');
+    return stored ? JSON.parse(stored) : [];
   });
 
-  // Always save cartItems to localStorage whenever it changes
+  // Persist every change (even empty)
   useEffect(() => {
-    if (cartItems.length > 0) {
-      localStorage.setItem('cart', JSON.stringify(cartItems)); // Save cartItems to localStorage
-    }
-  }, [cartItems]); // Re-run this effect whenever cartItems changes
+    localStorage.setItem('cart', JSON.stringify(cartItems));
+  }, [cartItems]);
 
-  // Add item to the cart, ensuring unique ID handling
+  // Add brand-new product or increase if exists
   const addToCart = (product, qty = 1) => {
     setCartItems(prev => {
-      const idx = prev.findIndex(item => item.id === product.id);
+      const idx = prev.findIndex(i => i.id === product.id);
       if (idx === -1) {
         return [...prev, { ...product, quantity: qty }];
       } else {
@@ -31,33 +29,49 @@ export const CartProvider = ({ children }) => {
     });
   };
 
-  // Remove item or decrease quantity
-  const removeFromCart = (id) => {
-    setCartItems(prev => {
-      const idx = prev.findIndex(item => item.id === id);
-      if (idx === -1) return prev;
-      const next = [...prev];
-      if (next[idx].quantity > 1) {
-        next[idx].quantity -= 1;
-      } else {
-        next.splice(idx, 1);
-      }
-      return next;
-    });
+  // Increase by exactly one
+  const increaseQuantity = (id) => {
+    setCartItems(prev =>
+      prev.map(item =>
+        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+      )
+    );
   };
 
-  // Clear cart
-  const clearCart = () => setCartItems([]);
+  // Decrease by one, or remove if at 1
+  const decreaseQuantity = (id) => {
+    setCartItems(prev =>
+      prev.flatMap(item => {
+        if (item.id !== id) return item;
+        if (item.quantity > 1) {
+          return { ...item, quantity: item.quantity - 1 };
+        }
+        // quantity was 1 → remove entirely
+        return [];
+      })
+    );
+  };
 
-  // Calculate total price
+  // Remove all of this item regardless of quantity
+  const removeFromCart = (id) => {
+    setCartItems(prev => prev.filter(item => item.id !== id));
+  };
+
+  // Empty the cart entirely
+  const clearCart = () => {
+    setCartItems([]);
+  };
+
   const total = useMemo(() =>
     cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0),
-  [cartItems]);
+    [cartItems]
+  );
 
-  // Provide value to the context
   const value = useMemo(() => ({
     cartItems,
     addToCart,
+    increaseQuantity,
+    decreaseQuantity,
     removeFromCart,
     clearCart,
     total,

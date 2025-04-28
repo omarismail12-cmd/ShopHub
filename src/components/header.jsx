@@ -15,9 +15,9 @@ export default function Header() {
         <h1 className="text-2xl font-bold text-gray-900">
           <Link to="/">ShopHub</Link>
         </h1>
-        <nav className="hidden md:flex gap-8 text-gray-800">
+        <nav className="hidden md:flex gap-8 text-black hover:text-gray-700">
           <Link to="/">Home</Link>
-          <Link to="/products">Products</Link>
+          <Link to="/products">Categories</Link>
           <Link to="/contact">Contact</Link>
         </nav>
       </div>
