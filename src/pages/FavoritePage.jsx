@@ -45,7 +45,7 @@ export default function FavoritesPage() {
 
   // 👇 Only show this if user IS logged in
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-80vh">
       
       <main className="flex-grow bg-white">
         {favorites.length === 0 ? (

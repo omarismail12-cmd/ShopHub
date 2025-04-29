@@ -19,9 +19,9 @@ export default function CartPage() {
   } = useCart();
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-80vh bg-white">
 
-      <main className="flex-grow bg-gray-50 py-12">
+      <main className="flex-grow bg-gray-50 py-8">
         <div className={`max-w-7xl mx-auto px-4 grid gap-8 ${
           cartItems.length > 0 ? 'grid-cols-1 lg:grid-cols-3' : ''
         }`}>
