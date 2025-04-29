@@ -1,7 +1,6 @@
 // pages/CartPage.jsx
 import { useCart } from '../components/CartContext';
 import Header from '../components/header';
-import Footer from '../components/footer';
 // import CheckoutPage from './checkOut';
 import {
   AiFillMinusCircle,
@@ -44,7 +43,7 @@ export default function CartPage() {
                   Start adding some items to your cart!
                 </p>
                 <button
-                  onClick={() => window.location.href = '/products'}
+                  onClick={() => window.location.href = '/categories'}
                   className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
                 >
                   Browse Products
@@ -135,7 +134,7 @@ export default function CartPage() {
         </div>
       </main>
 
-      <Footer />
+    
     </div>
   );
 }

@@ -3,15 +3,15 @@ import { Link } from "react-router-dom";
 const BodySection = () => {
   return (
     <div
-      className="relative bg-cover bg-center h-[64vh] flex items-center justify-start text-white px-4 md:px-20"
+      className="relative bg-cover bg-center h-[600px] flex items-center justify-start text-white px-4 md:px-20"
       style={{
         backgroundImage: `linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1441986300917-64674bd600d8')`,
       }}
     >
-      <div className="bg-opacity-50 p-2  text-left pl-40">
+      <div className="bg-opacity-50 p-2 text-left pl-40">
         <h1 className="text-4xl md:text-6xl font-bold mb-4">Welcome to ShopHub</h1>
         <p className="text-xl md:text-2xl mb-8">Discover amazing products at great prices</p>
-        <Link to='/products' className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg text-lg font-semibold flex items-center w-60 justify-center">
+        <Link to='/categories' className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg text-lg font-semibold flex items-center w-55 justify-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"

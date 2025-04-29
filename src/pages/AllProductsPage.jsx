@@ -1,10 +1,8 @@
-// pages/AllProductsPage.jsx
 import { useState, useMemo, useEffect } from "react";
 import { initialProducts } from "../lib/data";
 import { CiHeart } from "react-icons/ci";
 import { AiFillHeart } from "react-icons/ai";
 import Header from "../components/header";
-import Footer from "../components/footer";
 import debounce from "lodash.debounce";
 import { useCart } from "../components/CartContext";
 import { useFavorite } from "../components/favoriteContext";
@@ -16,21 +14,17 @@ export default function AllProductsPage() {
   const [searchInput, setSearchInput] = useState("");
   const [search, setSearch] = useState("");
 
-  // 👉 Pull cartItems and increaseQuantity
   const { addToCart, increaseQuantity, cartItems } = useCart();
   const { addToFavorites, removeFromFavorites, isFavorited } = useFavorite();
 
-  // Debounce search
   useEffect(() => {
     const handler = debounce(() => setSearch(searchInput), 300);
     handler();
     return () => handler.cancel();
   }, [searchInput]);
 
-  // Check if a product is already in the cart
   const isInCart = (id) => cartItems.some(item => item.id === id);
 
-  // Filter logic (unchanged)
   const filteredProducts = useMemo(() =>
     initialProducts.filter(product => {
       const matchesCategory = !category || product.category === category;
@@ -55,54 +49,57 @@ export default function AllProductsPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
             {/* Category Filter */}
             <div>
-              <label className="block text-sm font-medium mb-1" htmlFor="category">
+              <label className="block text-sm font-semibold text-gray-700 mb-2" htmlFor="category">
                 Category
               </label>
               <select
                 id="category"
                 value={category}
                 onChange={e => setCategory(e.target.value)}
-                className="w-full border border-gray-300 rounded-md px-3 py-2"
+                className="w-full border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition"
               >
                 <option value="">All</option>
                 <option value="electronics">Electronics</option>
                 <option value="clothing">Clothing</option>
                 <option value="books">Books</option>
-                {/* Add more categories as needed */}
               </select>
             </div>
+
             {/* Price Filter */}
-            <div className="flex gap-2">
+            <div className="flex gap-3">
               <div className="flex-1">
-                <label className="block text-sm font-medium mb-1" htmlFor="minPrice">
+                <label className="block text-sm font-semibold text-gray-700 mb-2" htmlFor="minPrice">
                   Min Price
                 </label>
                 <input
                   id="minPrice"
                   type="number"
+                  placeholder="Min"
                   value={minPrice}
                   onChange={e => setMinPrice(e.target.value)}
-                  className="w-full border border-gray-300 rounded-md px-3 py-2"
+                  className="w-full border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition"
                   min="0"
                 />
               </div>
               <div className="flex-1">
-                <label className="block text-sm font-medium mb-1" htmlFor="maxPrice">
+                <label className="block text-sm font-semibold text-gray-700 mb-2" htmlFor="maxPrice">
                   Max Price
                 </label>
                 <input
                   id="maxPrice"
                   type="number"
+                  placeholder="Max"
                   value={maxPrice}
                   onChange={e => setMaxPrice(e.target.value)}
-                  className="w-full border border-gray-300 rounded-md px-3 py-2"
+                  className="w-full border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition"
                   min="0"
                 />
               </div>
             </div>
+
             {/* Search Filter */}
             <div>
-              <label className="block text-sm font-medium mb-1" htmlFor="search">
+              <label className="block text-sm font-semibold text-gray-700 mb-2" htmlFor="search">
                 Search
               </label>
               <input
@@ -110,7 +107,7 @@ export default function AllProductsPage() {
                 type="text"
                 value={searchInput}
                 onChange={e => setSearchInput(e.target.value)}
-                className="w-full border border-gray-300 rounded-md px-3 py-2"
+                className="w-full border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition"
                 placeholder="Search products..."
               />
             </div>
@@ -127,7 +124,6 @@ export default function AllProductsPage() {
                   key={product.id}
                   className="bg-white rounded-lg shadow-md overflow-hidden relative group"
                 >
-                  {/* Image + favorite toggle (unchanged) */}
                   <div className="w-full aspect-[4/3] overflow-hidden rounded-t-md hover:scale-105 transition-transform duration-300 ease-in-out">
                     <img
                       src={product.image_url}
@@ -149,14 +145,11 @@ export default function AllProductsPage() {
                       : <CiHeart className="w-6 h-6 text-gray-400 hover:text-gray-600" />}
                   </button>
 
-                  {/* Name, desc, price + Add button */}
                   <div className="mt-4 p-4">
                     <h3 className="text-lg font-semibold">{product.name}</h3>
                     <p className="text-sm text-gray-500">{product.description}</p>
                     <div className="mt-3 flex justify-between items-center">
                       <span className="text-lg font-bold">${product.price}</span>
-
-                      {/* ← Updated Add-to-Cart logic */}
                       <button
                         onClick={() =>
                           inCart
@@ -179,7 +172,6 @@ export default function AllProductsPage() {
           </div>
         </div>
       </section>
-      <Footer />
     </>
   );
 }

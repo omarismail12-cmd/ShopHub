@@ -6,7 +6,6 @@ import { AiFillHeart } from "react-icons/ai";
 import { useFavorite } from "../components/favoriteContext";
 import { useCart } from "../components/CartContext";
 import Header from "../components/header";
-import Footer from "../components/footer";
 
 export default function FavoritesPage() {
   const [user, setUser] = useState(null);
@@ -57,7 +56,7 @@ export default function FavoritesPage() {
               Start adding some items to your favorites!
             </p>
             <Link
-              to="/products"
+              to="/categories"
               className="inline-flex items-center px-4 py-2 mt-4 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700"
             >
               Browse Products
@@ -117,7 +116,6 @@ export default function FavoritesPage() {
           </section>
         )}
       </main>
-      <Footer />
     </div>
   );
 }

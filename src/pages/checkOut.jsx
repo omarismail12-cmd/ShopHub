@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import Header from '../components/header';
-import Footer from '../components/footer';
+
 
 const CheckoutPage = () => {
   return (
@@ -71,7 +71,6 @@ const CheckoutPage = () => {
         </div>
       </div>
     </div>
-    <Footer/>
     </>
   );
 };

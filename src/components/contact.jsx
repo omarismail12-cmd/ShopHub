@@ -4,7 +4,7 @@ import { LuMapPin } from "react-icons/lu";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { FiPhone } from "react-icons/fi";
 import Header from "../components/header";
-import Footer from "../components/footer";
+
 
 const Contact = () => {
   const form = useRef();
@@ -119,7 +119,6 @@ const Contact = () => {
         </div>
       </div>
     </div>
-    <Footer />
     </>
   );
 };
