@@ -27,7 +27,7 @@ export default function FavoritesPage() {
   if (!user) {
     // 👇 This is your old Favorite.jsx content, now merged here
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen text-center">
+      <div className="flex flex-col items-center justify-center min-h-65vh text-center">
         <CiHeart className="text-7xl text-gray-400 mb-4" />
         <h2 className="text-2xl font-semibold mb-2">Sign in to view your favorites</h2>
         <p className="text-gray-500 mb-6">
