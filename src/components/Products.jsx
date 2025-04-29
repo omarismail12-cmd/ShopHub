@@ -3,7 +3,7 @@ import { CiHeart } from "react-icons/ci";
 import { AiFillHeart } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { useCart } from "./CartContext";
-import { useFavorite } from "./favoriteContext";
+import { useFavorite } from "./FavoriteContext";
 import { initialProducts } from "../lib/data";
 
 export default function FeaturedProducts() {
