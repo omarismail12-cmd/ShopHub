@@ -3,7 +3,7 @@ import emailjs from '@emailjs/browser';
 import { LuMapPin } from "react-icons/lu";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { FiPhone } from "react-icons/fi";
-import Header from "../components/header";
+
 
 
 const Contact = () => {
@@ -33,8 +33,7 @@ const Contact = () => {
   };
 
   return (
-    <>
-    <Header />
+  
     <div className="max-w-7xl mx-auto px-2 py-8">
       <h1 className="text-4xl font-bold text-gray-800 mb-6 flex justify-center">Contact Us</h1>
 
@@ -119,7 +118,7 @@ const Contact = () => {
         </div>
       </div>
     </div>
-    </>
+    
   );
 };
 
