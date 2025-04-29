@@ -4,7 +4,7 @@ import { initialProducts } from "../lib/data";
 import { CiHeart } from "react-icons/ci";
 import { AiFillHeart } from "react-icons/ai";
 import Header from "../components/header";
-import Footer from "../components/Footer";
+import Footer from "../components/footer";
 import debounce from "lodash.debounce";
 import { useCart } from "../components/CartContext";
 import { useFavorite } from "../components/favoriteContext";

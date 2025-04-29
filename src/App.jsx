@@ -6,6 +6,9 @@ import CartPage from "./pages/CartPage";
 import Contact from "./components/contact";
 import { FavoriteProvider } from "./components/favoriteContext";
 import { CartProvider } from "./components/CartContext";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
+import CheckoutPage from "./pages/checkOut";
 
 
 function App() {
@@ -21,7 +24,10 @@ function App() {
             <Route path="/favorites" element={<FavoritesPage />} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/signup" element={<SignUp />} />
             <Route path="*" element={<h2>404 - Page Not Found</h2>} />
+            <Route path="/checkout" element={<CheckoutPage />} />
           </Routes>
         </Router>
       </CartProvider>

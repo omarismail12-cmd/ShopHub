@@ -1,8 +1,12 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
+import Header from '../components/header';
+import Footer from '../components/footer';
 
 const CheckoutPage = () => {
   return (
+    <>
+    <Header />
     <div className="min-h-screen bg-white p-8">
       <h1 className="text-3xl font-bold mb-8">Checkout</h1>
 
@@ -67,6 +71,8 @@ const CheckoutPage = () => {
         </div>
       </div>
     </div>
+    <Footer/>
+    </>
   );
 };
 

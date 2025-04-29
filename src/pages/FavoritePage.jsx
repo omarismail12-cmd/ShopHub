@@ -4,7 +4,7 @@ import { AiFillHeart } from "react-icons/ai";
 import { useFavorite } from "../components/favoriteContext";
 import { useCart } from "../components/CartContext";
 import Header from "../components/header";
-import Footer from "../components/Footer";
+import Footer from "../components/footer";
 import { Link } from "react-router-dom";
 
 export default function FavoritesPage() {
