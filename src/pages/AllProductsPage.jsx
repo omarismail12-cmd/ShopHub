@@ -2,7 +2,6 @@ import { useState, useMemo, useEffect } from "react";
 import { initialProducts } from "../lib/data";
 import { CiHeart } from "react-icons/ci";
 import { AiFillHeart } from "react-icons/ai";
-import Header from "../components/header";
 import debounce from "lodash.debounce";
 import { useCart } from "../components/CartContext";
 import { useFavorite } from "../components/FavoriteContext";
@@ -39,8 +38,7 @@ export default function AllProductsPage() {
   [category, minPrice, maxPrice, search]);
 
   return (
-    <>
-      <Header />
+    
       <section className="bg-white py-12 shadow-md">
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-3xl font-bold mb-10">Shop by Category</h2>
@@ -172,6 +170,6 @@ export default function AllProductsPage() {
           </div>
         </div>
       </section>
-    </>
+    
   );
 }

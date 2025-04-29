@@ -1,22 +1,47 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
-import Header from '../components/header';
-
+import { Link, useNavigate } from 'react-router-dom';
+import { useCart } from '../components/CartContext';
 
 const CheckoutPage = () => {
   const { cartItems, total } = useCart();
   const navigate = useNavigate();
   const [isDone, setIsDone] = useState(false);
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    address: '',
+    city: '',
+    postalCode: '',
+    country: '',
+    cardNumber: '',
+    expiryDate: '',
+    cvv: '',
+  });
 
   useEffect(() => {
     const userData = localStorage.getItem('user');
     setIsDone(!!userData);
   }, []);
 
+  const user = JSON.parse(localStorage.getItem('user')) || {};
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Handle form submission logic
+    console.log('Order Submitted', formData);
+  };
+
   if (!isDone) {
     return (
-      <>
-        <Header />
+    
+    
         <div className="min-h-[75vh] bg-white px-6 md:px-40 py-8 flex flex-col items-center justify-center">
           <h1 className="text-3xl font-bold mb-8">Please sign in to checkout</h1>
           <button
@@ -32,19 +57,16 @@ const CheckoutPage = () => {
             </Link>
           </p>
         </div>
-        <Footer />
-      </>
+        
+      
     );
   }
 
-  const user = JSON.parse(localStorage.getItem('user'));
-
   return (
-    <>
-      <Header />
+   
       <div className="min-h-screen bg-white px-6 md:px-40 py-8">
         <h1 className="text-4xl font-bold mb-8 mt-8">Checkout</h1>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2 space-y-8">
               <div className="p-6">
@@ -52,36 +74,80 @@ const CheckoutPage = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="flex flex-col">
                     <label className="text-m font-medium mb-1 text-gray-700">First Name</label>
-                    <input type="text" required className="w-full border border-transparent rounded-md p-2 shadow-sm" />
+                    <input
+                      type="text"
+                      name="firstName"
+                      value={formData.firstName}
+                      onChange={handleChange}
+                      required
+                      className="w-full border border-transparent rounded-md p-2 shadow-sm"
+                    />
                   </div>
                   <div className="flex flex-col">
                     <label className="text-m font-medium mb-1 text-gray-700">Last Name</label>
-                    <input type="text" required className="w-full border border-transparent rounded-md p-2 shadow-sm" />
+                    <input
+                      type="text"
+                      name="lastName"
+                      value={formData.lastName}
+                      onChange={handleChange}
+                      required
+                      className="w-full border border-transparent rounded-md p-2 shadow-sm"
+                    />
                   </div>
                   <div className="flex flex-col md:col-span-2">
                     <label className="text-m font-medium mb-1 text-gray-700">Email</label>
-                    <input 
-                      type="email" 
-                      required 
-                      defaultValue={user?.email || ''}
-                      className="w-full border border-transparent rounded-md p-2 shadow-sm" 
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email || user.email}
+                      onChange={handleChange}
+                      required
+                      className="w-full border border-transparent rounded-md p-2 shadow-sm"
                     />
                   </div>
                   <div className="flex flex-col md:col-span-2">
                     <label className="text-m font-medium mb-1 text-gray-700">Address</label>
-                    <input type="text" required className="w-full border border-transparent rounded-md p-2 shadow-sm" />
+                    <input
+                      type="text"
+                      name="address"
+                      value={formData.address}
+                      onChange={handleChange}
+                      required
+                      className="w-full border border-transparent rounded-md p-2 shadow-sm"
+                    />
                   </div>
                   <div className="flex flex-col">
                     <label className="text-m font-medium mb-1 text-gray-700">City</label>
-                    <input type="text" required className="w-full border border-transparent rounded-md p-2 shadow-sm" />
+                    <input
+                      type="text"
+                      name="city"
+                      value={formData.city}
+                      onChange={handleChange}
+                      required
+                      className="w-full border border-transparent rounded-md p-2 shadow-sm"
+                    />
                   </div>
                   <div className="flex flex-col">
                     <label className="text-m font-medium mb-1 text-gray-700">Postal Code</label>
-                    <input type="text" required className="w-full border border-transparent rounded-md p-2 shadow-sm" />
+                    <input
+                      type="text"
+                      name="postalCode"
+                      value={formData.postalCode}
+                      onChange={handleChange}
+                      required
+                      className="w-full border border-transparent rounded-md p-2 shadow-sm"
+                    />
                   </div>
                   <div className="flex flex-col md:col-span-2">
                     <label className="text-m font-medium mb-1 text-gray-700">Country</label>
-                    <input type="text" required className="w-full border border-transparent rounded-md p-2 shadow-sm" />
+                    <input
+                      type="text"
+                      name="country"
+                      value={formData.country}
+                      onChange={handleChange}
+                      required
+                      className="w-full border border-transparent rounded-md p-2 shadow-sm"
+                    />
                   </div>
                 </div>
               </div>
@@ -93,6 +159,9 @@ const CheckoutPage = () => {
                     <label className="text-sm font-medium mb-1">Card Number</label>
                     <input
                       type="text"
+                      name="cardNumber"
+                      value={formData.cardNumber}
+                      onChange={handleChange}
                       required
                       placeholder="1234 5678 9012 3456"
                       className="w-full border border-gray-300 rounded-md p-2 shadow-sm"
@@ -102,6 +171,9 @@ const CheckoutPage = () => {
                     <label className="text-sm font-medium mb-1">Expiry Date (MM/YY)</label>
                     <input
                       type="text"
+                      name="expiryDate"
+                      value={formData.expiryDate}
+                      onChange={handleChange}
                       required
                       placeholder="MM/YY"
                       className="w-full border border-transparent rounded-md p-2 shadow-sm"
@@ -111,6 +183,9 @@ const CheckoutPage = () => {
                     <label className="text-sm font-medium mb-1">CVV</label>
                     <input
                       type="text"
+                      name="cvv"
+                      value={formData.cvv}
+                      onChange={handleChange}
                       required
                       placeholder="123"
                       className="w-full border border-transparent rounded-md p-2 shadow-sm"
@@ -151,8 +226,7 @@ const CheckoutPage = () => {
           </div>
         </form>
       </div>
-    </div>
-    </>
+    
   );
 };
 

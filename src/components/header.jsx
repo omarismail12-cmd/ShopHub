@@ -25,7 +25,7 @@ export default function Header() {
   };
 
   return (
-    <header className="bg-white shadow-md px-6 md:px-20 py-4 flex justify-between items-center sticky top-0 z-50">
+    <header className="bg-white shadow-md px-6 md:px-20 py-4 flex justify-between items-center">
       <div className="flex items-center gap-8">
         <h1 className="text-2xl font-bold text-gray-900">
           <Link to="/">ShopHub</Link>

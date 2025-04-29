@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { CiHeart } from "react-icons/ci";
 import { AiFillHeart } from "react-icons/ai";
-import { useFavorite } from "../components/favoriteContext";
+import { useFavorite } from "../components/FavoriteContext";
 import { useCart } from "../components/CartContext";
-import Header from "../components/header";
+
 
 export default function FavoritesPage() {
   const [user, setUser] = useState(null);
@@ -46,7 +46,7 @@ export default function FavoritesPage() {
   // 👇 Only show this if user IS logged in
   return (
     <div className="flex flex-col min-h-screen">
-      <Header />
+      
       <main className="flex-grow bg-white">
         {favorites.length === 0 ? (
           <div className="text-center flex flex-col items-center justify-center h-[30vh]">

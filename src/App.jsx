@@ -4,12 +4,14 @@ import AllProductsPage from "./pages/AllProductsPage";
 import FavoritesPage from "./pages/FavoritePage";
 import CartPage from "./pages/cartPage";
 import Contact from "./components/contact";
-import { FavoriteProvider } from "./components/favoriteContext";
+import { FavoriteProvider } from "./components/FavoriteContext";
 import { CartProvider } from "./components/CartContext";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import CheckoutPage from "./pages/checkOut";
-import Footer from "./components/footer"; // Add Footer import here
+import Footer from "./components/footer";
+import Header from "./components/header";
+import NotFound from "./pages/NotFoundPage";
 
 function App() {
   return (
@@ -17,6 +19,7 @@ function App() {
       <CartProvider>
         <Router>
           <div className="min-h-screen flex flex-col">
+            <Header />
             <main className="flex-grow">
               <Routes>
                 <Route path="/" element={<HomePage />} />
@@ -28,7 +31,10 @@ function App() {
                 <Route path="/signin" element={<SignIn />} />
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/checkout" element={<CheckoutPage />} />
-                <Route path="*" element={<h2 className="text-center mt-20 text-xl text-gray-600">404 - Page Not Found</h2>} />
+                <Route
+                  path="*"
+                  element={<NotFound />}
+                />
               </Routes>
             </main>
             <Footer />
