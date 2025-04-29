@@ -7,7 +7,7 @@ import Header from "../components/header";
 import Footer from "../components/footer";
 import debounce from "lodash.debounce";
 import { useCart } from "../components/CartContext";
-import { useFavorite } from "../components/favoriteContext";
+import { useFavorite } from "../components/FavoriteContext";
 
 export default function AllProductsPage() {
   const [category, setCategory] = useState("");

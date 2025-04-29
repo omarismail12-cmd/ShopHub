@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import AllProductsPage from "./pages/AllProductsPage";
 import FavoritesPage from "./pages/FavoritePage";
-import CartPage from "./pages/CartPage";
+import CartPage from "./pages/cartPage";
 import Contact from "./components/contact";
 import { FavoriteProvider } from "./components/favoriteContext";
 import { CartProvider } from "./components/CartContext";
@@ -19,6 +19,7 @@ function App() {
         <Router>
           {/* <Navigation /> */}
           <Routes>
+          <Route path="/" element={<HomePage />} />
             <Route path="/home" element={<HomePage />} />
             <Route path="/products" element={<AllProductsPage />} />
             <Route path="/favorites" element={<FavoritesPage />} />
