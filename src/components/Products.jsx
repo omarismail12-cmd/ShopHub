@@ -12,7 +12,7 @@ export default function FeaturedProducts() {
   const { addToFavorites, removeFromFavorites, isFavorited } = useFavorite();
 
   // helper to know if item is already in cart
-  const isInCart = (id) => cartItems.some(item => item.id === id);
+  const isInCart = (id) => cartItems.some((item) => item.id === id);
 
   return (
     <section className="bg-gray-50 py-12">
@@ -44,13 +44,14 @@ export default function FeaturedProducts() {
                       ? removeFromFavorites(product.id)
                       : addToFavorites(product)
                   }
-                  aria-label={fav ? "Remove from favorites" : "Add to favorites"}
+                  // aria-label={fav ? "Remove from favorites" : "Add to favorites"}
                   className="absolute top-2 right-2 p-2 bg-white rounded-full shadow-md hover:bg-gray-100 transition"
                 >
-                  {fav
-                    ? <AiFillHeart className="w-6 h-6 text-red-500" />
-                    : <CiHeart className="w-6 h-6 text-gray-400 hover:text-gray-600" />
-                  }
+                  {fav ? (
+                    <AiFillHeart className="w-6 h-6 text-red-500" />
+                  ) : (
+                    <CiHeart className="w-6 h-6 text-gray-400 hover:text-gray-600" />
+                  )}
                 </button>
 
                 <div className="mt-4 p-4">

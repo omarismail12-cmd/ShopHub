@@ -13,16 +13,24 @@ function Footer() {
           </div>
 
           <div>
-            <h4 className="text-white mb-4 text-lg font-semibold">Quick Links</h4>
+            <h4 className="text-white mb-4 text-lg font-semibold">
+              Quick Links
+            </h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <a href="/" className="hover:text-white transition">Home</a>
+                <a href="/" className="hover:text-white transition">
+                  Home
+                </a>
               </li>
               <li>
-                <a href="/categories" className="hover:text-white transition">Categories</a>
+                <a href="/categories" className="hover:text-white transition">
+                  Categories
+                </a>
               </li>
               <li>
-                <a href="/contact" className="hover:text-white transition">Contact</a>
+                <a href="/contact" className="hover:text-white transition">
+                  Contact
+                </a>
               </li>
             </ul>
           </div>
@@ -39,13 +47,25 @@ function Footer() {
           <div>
             <h4 className="text-white mb-4 text-lg font-semibold">Follow Us</h4>
             <div className="flex gap-4">
-              <a href="https://facebook.com" aria-label="Facebook" className="hover:text-white">
+              <a
+                href="https://facebook.com"
+                aria-label="Facebook"
+                className="hover:text-white"
+              >
                 <FaFacebookF size={20} />
               </a>
-              <a href="https://twitter.com" aria-label="Twitter" className="hover:text-white">
+              <a
+                href="https://twitter.com"
+                aria-label="Twitter"
+                className="hover:text-white"
+              >
                 <FaTwitter size={20} />
               </a>
-              <a href="https://instagram.com" aria-label="Instagram" className="hover:text-white">
+              <a
+                href="https://instagram.com"
+                aria-label="Instagram"
+                className="hover:text-white"
+              >
                 <FaInstagram size={20} />
               </a>
             </div>

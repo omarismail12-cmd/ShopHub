@@ -1,10 +1,8 @@
-import { useRef } from 'react';
-import emailjs from '@emailjs/browser';
+import { useRef } from "react";
+import emailjs from "@emailjs/browser";
 import { LuMapPin } from "react-icons/lu";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { FiPhone } from "react-icons/fi";
-
-
 
 const Contact = () => {
   const form = useRef();
@@ -13,36 +11,48 @@ const Contact = () => {
     e.preventDefault();
 
     if (!form.current) {
-      alert('Form reference not found.');
+      alert("Form reference not found.");
       return;
     }
 
-    emailjs.sendForm(
-      'service_4icfaac',
-      'template_a3lqulf',
-      form.current,
-      '3IJfpOD0eHNgGiZqJ'
-    )
-    .then(() => {
-      alert('Message sent successfully!');
-      e.target.reset();
-    }, (error) => {
-      alert('Failed to send the message, please try again.');
-      console.log(error.text);
-    });
+    emailjs
+      .sendForm(
+        "service_4icfaac",
+        "template_a3lqulf",
+        form.current,
+        "3IJfpOD0eHNgGiZqJ"
+      )
+      .then(
+        () => {
+          alert("Message sent successfully!");
+          e.target.reset();
+        },
+        (error) => {
+          alert("Failed to send the message, please try again.");
+          console.log(error.text);
+        }
+      );
   };
 
   return (
-  
     <div className="max-w-7xl mx-auto px-2 py-8">
-      <h1 className="text-4xl font-bold text-gray-800 mb-6 flex justify-center">Contact Us</h1>
+      <h1 className="text-4xl font-bold text-gray-800 mb-6 flex justify-center">
+        Contact Us
+      </h1>
 
       <div className="grid md:grid-cols-2 gap-8">
         <div className="bg-white p-6 rounded-lg">
-          <h2 className="text-3xl font-semibold text-black mb-4">Get in Touch</h2>
+          <h2 className="text-3xl font-semibold text-black mb-4">
+            Get in Touch
+          </h2>
           <form ref={form} onSubmit={sendEmail}>
             <div className="mb-4">
-              <label htmlFor="name" className="block font-semibold text-gray-700 mb-2">Name</label>
+              <label
+                htmlFor="name"
+                className="block font-semibold text-gray-700 mb-2"
+              >
+                Name
+              </label>
               <input
                 type="text"
                 id="name"
@@ -52,7 +62,12 @@ const Contact = () => {
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="email" className="block font-semibold text-gray-700 mb-2">Email</label>
+              <label
+                htmlFor="email"
+                className="block font-semibold text-gray-700 mb-2"
+              >
+                Email
+              </label>
               <input
                 type="email"
                 id="email"
@@ -62,7 +77,12 @@ const Contact = () => {
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="message" className="block font-semibold text-gray-700 mb-2">Message</label>
+              <label
+                htmlFor="message"
+                className="block font-semibold text-gray-700 mb-2"
+              >
+                Message
+              </label>
               <textarea
                 id="message"
                 name="message"
@@ -82,13 +102,18 @@ const Contact = () => {
 
         <div className="space-y-6">
           <div className="p-6 rounded-lg">
-            <h2 className="text-3xl font-semibold text-black mb-4">Contact Information</h2>
+            <h2 className="text-3xl font-semibold text-black mb-4">
+              Contact Information
+            </h2>
             <div className="space-y-3">
               <div>
                 <h3 className="font-medium text-black flex items-center gap-3">
-                  <MdOutlineMailOutline className="text-blue-600" size={30} /> Email
+                  <MdOutlineMailOutline className="text-blue-600" size={30} />{" "}
+                  Email
                 </h3>
-                <p className="text-gray-600 text-lg px-11">support@shophub.com</p>
+                <p className="text-gray-600 text-lg px-11">
+                  support@shophub.com
+                </p>
               </div>
               <div>
                 <h3 className="font-medium text-black flex items-center gap-4">
@@ -101,24 +126,35 @@ const Contact = () => {
                   <LuMapPin className="text-blue-600" size={30} /> Address
                 </h3>
                 <p className="text-gray-600 text-lg px-12">
-                  123 Shop Street<br />City, Country
+                  123 Shop Street
+                  <br />
+                  City, Country
                 </p>
               </div>
             </div>
           </div>
 
           <div className="p-6 rounded-lg">
-            <h2 className="text-3xl font-semibold text-black mb-4">Business Hours</h2>
+            <h2 className="text-3xl font-semibold text-black mb-4">
+              Business Hours
+            </h2>
             <ul className="space-y-2 text-black">
-              <li><span className='font-semibold'>Monday - Friday:</span> 9:00 AM - 6:00 PM</li>
-              <li><span className='font-semibold'>Saturday:</span> 10:00 AM - 4:00 PM</li>
-              <li><span className='font-semibold'>Sunday:</span> Closed</li>
+              <li>
+                <span className="font-semibold">Monday - Friday:</span> 9:00 AM
+                - 6:00 PM
+              </li>
+              <li>
+                <span className="font-semibold">Saturday:</span> 10:00 AM - 4:00
+                PM
+              </li>
+              <li>
+                <span className="font-semibold">Sunday:</span> Closed
+              </li>
             </ul>
           </div>
         </div>
       </div>
     </div>
-    
   );
 };
 

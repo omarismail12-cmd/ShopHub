@@ -6,7 +6,6 @@ import { AiFillHeart } from "react-icons/ai";
 import { useFavorite } from "../components/FavoriteContext";
 import { useCart } from "../components/CartContext";
 
-
 export default function FavoritesPage() {
   const [user, setUser] = useState(null);
   const { favorites, removeFromFavorites, isFavorited } = useFavorite();
@@ -25,11 +24,12 @@ export default function FavoritesPage() {
   };
 
   if (!user) {
-    // 👇 This is your old Favorite.jsx content, now merged here
     return (
       <div className="flex flex-col items-center justify-center min-h-65vh text-center">
         <CiHeart className="text-7xl text-gray-400 mb-4" />
-        <h2 className="text-2xl font-semibold mb-2">Sign in to view your favorites</h2>
+        <h2 className="text-2xl font-semibold mb-2">
+          Sign in to view your favorites
+        </h2>
         <p className="text-gray-500 mb-6">
           You need to be signed in to manage your favorite items.
         </p>
@@ -46,12 +46,13 @@ export default function FavoritesPage() {
   // 👇 Only show this if user IS logged in
   return (
     <div className="flex flex-col min-h-80vh">
-      
       <main className="flex-grow bg-white">
         {favorites.length === 0 ? (
           <div className="text-center flex flex-col items-center justify-center h-[30vh]">
             <CiHeart className="h-12 w-12 text-gray-400" />
-            <h2 className="mt-2 text-lg font-medium text-gray-900">No favorites yet</h2>
+            <h2 className="mt-2 text-lg font-medium text-gray-900">
+              No favorites yet
+            </h2>
             <p className="mt-1 text-sm text-gray-500">
               Start adding some items to your favorites!
             </p>
@@ -96,10 +97,16 @@ export default function FavoritesPage() {
                       </button>
 
                       <div className="mt-4 p-4">
-                        <h3 className="text-lg font-semibold">{product.name}</h3>
-                        <p className="text-sm text-gray-500 mb-4">{product.description}</p>
+                        <h3 className="text-lg font-semibold">
+                          {product.name}
+                        </h3>
+                        <p className="text-sm text-gray-500 mb-4">
+                          {product.description}
+                        </p>
                         <div className="flex justify-between items-center">
-                          <span className="text-lg font-bold">${product.price}</span>
+                          <span className="text-lg font-bold">
+                            ${product.price}
+                          </span>
                           <button
                             onClick={() => addToCart(product)}
                             className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"

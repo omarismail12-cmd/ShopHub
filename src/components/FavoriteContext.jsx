@@ -1,36 +1,39 @@
-import { createContext, useContext, useState, useMemo, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import { createContext, useContext, useState, useMemo, useEffect } from "react";
+import PropTypes from "prop-types";
 
 const FavoriteContext = createContext();
 
 export const FavoriteProvider = ({ children }) => {
   const [favorites, setFavorites] = useState(() => {
-    const storedFavorites = localStorage.getItem('favorites');
+    const storedFavorites = localStorage.getItem("favorites");
     return storedFavorites ? JSON.parse(storedFavorites) : [];
   });
 
   const addToFavorites = (item) => {
-    setFavorites(prev =>
-      prev.some(fav => fav.id === item.id) ? prev : [...prev, item]
+    setFavorites((prev) =>
+      prev.some((fav) => fav.id === item.id) ? prev : [...prev, item]
     );
   };
 
   const removeFromFavorites = (id) => {
-    setFavorites(prev => prev.filter(item => item.id !== id));
+    setFavorites((prev) => prev.filter((item) => item.id !== id));
   };
 
-  const isFavorited = (id) => favorites.some(item => item.id === id);
+  const isFavorited = (id) => favorites.some((item) => item.id === id);
 
   useEffect(() => {
-    localStorage.setItem('favorites', JSON.stringify(favorites));
+    localStorage.setItem("favorites", JSON.stringify(favorites));
   }, [favorites]);
 
-  const value = useMemo(() => ({
-    favorites,
-    addToFavorites,
-    removeFromFavorites,
-    isFavorited,
-  }), [favorites]);
+  const value = useMemo(
+    () => ({
+      favorites,
+      addToFavorites,
+      removeFromFavorites,
+      isFavorited,
+    }),
+    [favorites]
+  );
 
   return (
     <FavoriteContext.Provider value={value}>
@@ -45,6 +48,6 @@ FavoriteProvider.propTypes = {
 
 export const useFavorite = () => {
   const ctx = useContext(FavoriteContext);
-  if (!ctx) throw new Error('useFavorite must be used within FavoriteProvider');
+  if (!ctx) throw new Error("useFavorite must be used within FavoriteProvider");
   return ctx;
 };

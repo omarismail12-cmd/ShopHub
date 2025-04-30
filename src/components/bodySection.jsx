@@ -9,9 +9,16 @@ const BodySection = () => {
       }}
     >
       <div className="bg-opacity-50 p-2 text-left pl-10 sm:pl-16 md:pl-40 lg:pl-48 xl:pl-64">
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4">Welcome to ShopHub</h1>
-        <p className="text-xl sm:text-2xl md:text-2xl mb-8">Discover amazing products at great prices</p>
-        <Link to='/categories' className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg text-lg font-semibold flex items-center w-max justify-center">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4">
+          Welcome to ShopHub
+        </h1>
+        <p className="text-xl sm:text-2xl md:text-2xl mb-8">
+          Discover amazing products at great prices
+        </p>
+        <Link
+          to="/categories"
+          className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg text-lg font-semibold flex items-center w-max justify-center"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -28,7 +35,6 @@ const BodySection = () => {
             <path d="M3 6h18"></path>
             <path d="M16 10a4 4 0 0 1-8 0"></path>
           </svg>
-          
           Start Shopping
         </Link>
       </div>

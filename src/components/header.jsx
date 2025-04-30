@@ -1,10 +1,10 @@
 // components/Header.jsx
-import  { useEffect, useState } from 'react';
-import { FaSearch } from 'react-icons/fa';
+import { useEffect, useState } from "react";
+import { FaSearch } from "react-icons/fa";
 import { CiHeart } from "react-icons/ci";
 import { FiShoppingCart, FiUser } from "react-icons/fi";
-import { useCart } from '../components/CartContext';
-import { Link, useNavigate } from 'react-router-dom';
+import { useCart } from "../components/CartContext";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Header() {
   const { cartItems } = useCart();
@@ -14,14 +14,14 @@ export default function Header() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const userData = localStorage.getItem('user');
+    const userData = localStorage.getItem("user");
     setIsDone(!!userData);
   }, []);
 
   const handleSignOut = () => {
-    localStorage.removeItem('user');
+    localStorage.removeItem("user");
     setIsDone(false);
-    navigate('/signin');
+    navigate("/signin");
   };
 
   return (
@@ -47,7 +47,10 @@ export default function Header() {
           <FaSearch className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
         </div>
 
-        <Link to="/favorites" className="relative text-gray-700 hover:text-black">
+        <Link
+          to="/favorites"
+          className="relative text-gray-700 hover:text-black"
+        >
           <CiHeart size={24} />
         </Link>
 

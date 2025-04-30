@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 // SignIn.js
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -17,17 +17,22 @@ const SignIn = () => {
       password,
     };
 
-    localStorage.setItem('user', JSON.stringify(user));
-    navigate('/home');
+    localStorage.setItem("user", JSON.stringify(user));
+    navigate("/home");
   };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold text-center text-gray-900">Sign in to your account</h2>
+        <h2 className="text-2xl font-bold text-center text-gray-900">
+          Sign in to your account
+        </h2>
         <form className="space-y-5" onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-700"
+            >
               Email address
             </label>
             <input
@@ -39,7 +44,10 @@ const SignIn = () => {
             />
           </div>
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-700"
+            >
               Password
             </label>
             <input
@@ -58,10 +66,10 @@ const SignIn = () => {
           </button>
         </form>
         <p className="text-sm text-center text-gray-600">
-          Do not have an account?{' '}
+          Do not have an account?{" "}
           <Link to="/signup" className="text-blue-500 hover:underline">
-  Sign Up
-</Link>
+            Sign Up
+          </Link>
         </p>
       </div>
     </div>

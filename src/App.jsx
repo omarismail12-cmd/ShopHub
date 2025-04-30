@@ -31,10 +31,7 @@ function App() {
                 <Route path="/signin" element={<SignIn />} />
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/checkout" element={<CheckoutPage />} />
-                <Route
-                  path="*"
-                  element={<NotFound />}
-                />
+                <Route path="*" element={<NotFound />} />
               </Routes>
             </main>
             <Footer />
