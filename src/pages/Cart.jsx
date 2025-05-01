@@ -1,10 +1,11 @@
-import { Trash2, Send } from 'lucide-react';
+import { Trash2, Send, ShoppingCart as CartIcon } from 'lucide-react';
 import { useShop } from '../context/shopContext';
 import { useState } from 'react';
 
 export default function Cart() {
   const { cart, setCart } = useShop();
   const [name, setName] = useState('');
+  const [attemptedCheckout, setAttemptedCheckout] = useState(false);
 
   const removeFromCart = (id) => {
     setCart(cart.filter((item) => item.id !== id));
@@ -16,10 +17,20 @@ export default function Cart() {
     const message = `Hello, my name is ${name}.\n\nI'd like to order:\n\n${cart
       .map((item) => `• ${item.title} - $${item.price}`)
       .join('\n')}\n\nTotal: $${total}`;
-
-    const encoded = encodeURIComponent(message);
-    return `https://wa.me/?text=${encoded}`;
+    return `https://wa.me/?text=${encodeURIComponent(message)}`;
   };
+
+  if (cart.length === 0) {
+    return (
+      <div>
+        <h2 className="text-2xl font-bold mb-6">Shopping Cart</h2>
+        <div className="p-8 flex flex-col items-center justify-center h-64 text-gray-500">
+          <CartIcon className="w-16 h-16 mb-4" />
+          <p className="text-lg">Your cart is empty</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="p-8">
@@ -49,16 +60,28 @@ export default function Cart() {
           <input
             type="text"
             placeholder="Enter your name"
-            className="w-full border rounded px-3 py-2 mb-4"
+            className="w-full border rounded px-3 py-2 mb-2"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
 
+          {attemptedCheckout && !name && (
+            <p className="text-red-500 text-sm mb-2">Please enter your name before proceeding.</p>
+          )}
+
           <a
-            href={generateWhatsAppLink()}
+            href={name ? generateWhatsAppLink() : '#'}
+            onClick={(e) => {
+              if (!name) {
+                e.preventDefault();
+                setAttemptedCheckout(true);
+              }
+            }}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-green-600 hover:bg-green-700 text-white w-full flex items-center justify-center py-2 rounded text-lg"
+            className={`${
+              name ? 'bg-green-600 hover:bg-green-700' : 'bg-gray-400 cursor-not-allowed'
+            } text-white w-full flex items-center justify-center py-2 rounded text-lg transition`}
           >
             <Send className="mr-2" size={18} />
             Checkout via WhatsApp

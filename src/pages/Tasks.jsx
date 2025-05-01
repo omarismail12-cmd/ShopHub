@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Trash, X } from "lucide-react";
+import { Trash } from "lucide-react";
 
 export default function Tasks() {
   const [tasks, setTasks] = useState([]);
@@ -21,16 +21,18 @@ export default function Tasks() {
   };
 
   const toggleTask = (id) => {
-    setTasks(tasks.map(task =>
-      task.id === id ? { ...task, completed: !task.completed } : task
-    ));
+    setTasks(
+      tasks.map((task) =>
+        task.id === id ? { ...task, completed: !task.completed } : task
+      )
+    );
   };
 
   const deleteTask = (id) => {
-    setTasks(tasks.filter(task => task.id !== id));
+    setTasks(tasks.filter((task) => task.id !== id));
   };
 
-  const filteredTasks = tasks.filter(task => {
+  const filteredTasks = tasks.filter((task) => {
     if (filter === "completed") return task.completed;
     if (filter === "incomplete") return !task.completed;
     return true;
@@ -42,44 +44,60 @@ export default function Tasks() {
         📝 Task Manager
       </h2>
 
-      <div className="bg-white p-4 rounded shadow mb-6">
+      {/* Task Input Card */}
+      <div className="bg-white p-6 rounded-2xl shadow border mb-6">
+        <label className="block font-semibold mb-1">Task Title</label>
         <input
-          className="border p-2 w-full mb-2 rounded"
+          className="border border-gray-300 p-3 w-full mb-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           placeholder="Enter task title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
+        <label className="block font-semibold mb-1">Description</label>
         <textarea
-          className="border p-2 w-full mb-4 rounded"
+          className="border border-gray-300 p-3 w-full mb-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           placeholder="Enter task description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
         <button
           onClick={addTask}
-          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded"
+          className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg font-medium"
         >
           + Add Task
         </button>
       </div>
 
+      {/* Filter Buttons */}
       <div className="mb-4">
         <h3 className="text-lg font-semibold mb-2">Tasks</h3>
-        <div className="flex gap-2">
+        <div className="flex gap-2 mt-2">
           <button
-            className={`px-3 py-1 rounded ${filter === "all" ? "bg-blue-600 text-white" : "bg-gray-200"}`}
+            className={`px-4 py-1.5 rounded-md font-medium ${
+              filter === "all"
+                ? "bg-blue-600 text-white"
+                : "bg-gray-200 text-gray-700"
+            }`}
             onClick={() => setFilter("all")}
           >
             All
           </button>
           <button
-            className={`px-3 py-1 rounded ${filter === "completed" ? "bg-blue-600 text-white" : "bg-gray-200"}`}
+            className={`px-4 py-1.5 rounded-md font-medium ${
+              filter === "completed"
+                ? "bg-blue-600 text-white"
+                : "bg-gray-200 text-gray-700"
+            }`}
             onClick={() => setFilter("completed")}
           >
             Completed
           </button>
           <button
-            className={`px-3 py-1 rounded ${filter === "incomplete" ? "bg-blue-600 text-white" : "bg-gray-200"}`}
+            className={`px-4 py-1.5 rounded-md font-medium ${
+              filter === "incomplete"
+                ? "bg-blue-600 text-white"
+                : "bg-gray-200 text-gray-700"
+            }`}
             onClick={() => setFilter("incomplete")}
           >
             Incomplete
@@ -87,19 +105,39 @@ export default function Tasks() {
         </div>
       </div>
 
-      {filteredTasks.map(task => (
+      {/* Task List */}
+      {filteredTasks.map((task) => (
         <div
           key={task.id}
-          className="bg-white p-4 mb-3 rounded shadow flex justify-between items-start"
+          className="bg-white p-4 mb-3 rounded-xl shadow flex justify-between items-center"
         >
-          <div>
-            <button onClick={() => toggleTask(task.id)} className="mr-3 text-gray-600 hover:text-black">
-              <X className={`inline-block ${task.completed ? "text-green-500" : ""}`} />
+          <div className="flex items-center gap-3">
+            <button onClick={() => toggleTask(task.id)}>
+              <span
+                className={`w-6 h-6 inline-block rounded-full flex items-center justify-center border-2 text-sm font-bold ${
+                  task.completed
+                    ? "border-green-500 bg-green-100 text-green-600"
+                    : "border-gray-300 text-gray-400"
+                }`}
+              >
+                ✓
+              </span>
             </button>
-            <strong className={task.completed ? "line-through" : ""}>{task.title}</strong>
-            <div className="text-sm text-gray-500">{task.description}</div>
+            <div>
+              <strong
+                className={`block ${
+                  task.completed ? "line-through text-gray-500" : ""
+                }`}
+              >
+                {task.title}
+              </strong>
+              <div className="text-sm text-gray-500">{task.description}</div>
+            </div>
           </div>
-          <button onClick={() => deleteTask(task.id)} className="text-red-500 hover:text-red-700">
+          <button
+            onClick={() => deleteTask(task.id)}
+            className="text-red-500 hover:text-red-700"
+          >
             <Trash />
           </button>
         </div>

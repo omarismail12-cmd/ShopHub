@@ -30,17 +30,27 @@ export function ShopProvider({ children }) {
     );
   };
 
+  const removeFromFavorites = (product) => {
+    setFavorites((prev) => prev.filter((item) => item.id !== product.id));
+  };
+
   const addToCart = (product) => {
     setCart((prev) =>
       prev.find((item) => item.id === product.id) ? prev : [...prev, product]
     );
   };
 
+  const removeFromCart = (product) => {
+    setCart((prev) => prev.filter((item) => item.id !== product.id));
+  };
+
   const value = {
     favorites,
     cart,
     addToFavorites,
+    removeFromFavorites,
     addToCart,
+    removeFromCart,
     setCart,
     setFavorites,
   };

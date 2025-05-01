@@ -20,18 +20,22 @@ export default function Dashboard() {
   ];
 
   return (
-    <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+    <main className='max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8'>
+    <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
       {cards.map((card, index) => (
         <div
           key={index}
           onClick={() => navigate(card.link)}
-          className="cursor-pointer bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition"
+          className="cursor-pointer bg-white rounded-lg shadow-md p-8 hover:shadow-lg transition-shadow duration-200"
         >
+            <div className='flex items-center justify-center flex-col text-center'>
           <div className="mb-4">{card.icon}</div>
           <h2 className="text-xl font-semibold">{card.title}</h2>
           <p className="text-gray-500">{card.description}</p>
         </div>
+        </div>
       ))}
     </div>
+    </main>
   );
 }
