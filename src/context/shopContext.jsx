@@ -1,11 +1,28 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 const ShopContext = createContext();
 
 export function ShopProvider({ children }) {
-  const [favorites, setFavorites] = useState([]);
-  const [cart, setCart] = useState([]);
+  const [favorites, setFavorites] = useState(() => {
+    const stored = localStorage.getItem('favorites');
+    return stored ? JSON.parse(stored) : [];
+  });
+
+  const [cart, setCart] = useState(() => {
+    const stored = localStorage.getItem('cart');
+    return stored ? JSON.parse(stored) : [];
+  });
+
+  // Sync to localStorage when favorites change
+  useEffect(() => {
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+  }, [favorites]);
+
+  // Sync to localStorage when cart changes
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }, [cart]);
 
   const addToFavorites = (product) => {
     setFavorites((prev) =>
@@ -24,11 +41,13 @@ export function ShopProvider({ children }) {
     cart,
     addToFavorites,
     addToCart,
-    setCart
+    setCart,
+    setFavorites,
   };
 
   return <ShopContext.Provider value={value}>{children}</ShopContext.Provider>;
 }
+
 ShopProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
