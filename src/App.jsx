@@ -9,7 +9,7 @@ import { CartProvider } from "./components/CartContext";
 import SignIn from "./pages/signIn";
 import SignUp from "./pages/signUp";
 import CheckoutPage from "./pages/checkOut";
-import Footer from "./components/Footer";
+import Footer from "./components/footer";
 import Header from "./components/header";
 import NotFound from "./pages/NotFoundPage";
 
