@@ -1,6 +1,5 @@
 // pages/CartPage.jsx
 import { useCart } from '../components/CartContext';
-import Header from '../components/header';
 import Footer from '../components/Footer';
 import {
   AiFillMinusCircle,

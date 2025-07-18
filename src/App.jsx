@@ -7,7 +7,7 @@ import Contact from "./components/contact";
 import { FavoriteProvider } from "./components/FavoriteContext";
 import { CartProvider } from "./components/CartContext";
 import SignIn from "./pages/signIn";
-import SignUp from "./pages/SignUp";
+import SignUp from "./pages/signUp";
 import CheckoutPage from "./pages/checkOut";
 import Footer from "./components/Footer";
 import Header from "./components/header";
