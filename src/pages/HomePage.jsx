@@ -1,4 +1,4 @@
-import BodySection from "../components/BodySection";
+import BodySection from "../components/bodySection";
 import FeaturedCategories from "../components/FeaturedCategories";
 import FeaturedProducts from "../components/Products";
 
