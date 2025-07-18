@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../components/CartContext";
 
-const CheckoutPage = () => {
+const CheckOut = () => {
   const { cartItems, total } = useCart();
   const navigate = useNavigate();
   const [isDone, setIsDone] = useState(false);
@@ -250,5 +250,4 @@ const CheckoutPage = () => {
   );
 };
 
-
-export default CheckoutPage;
+export default CheckOut;

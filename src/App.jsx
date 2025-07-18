@@ -8,7 +8,7 @@ import { FavoriteProvider } from "./components/FavoriteContext";
 import { CartProvider } from "./components/CartContext";
 import SignIn from "./pages/signIn";
 import SignUp from "./pages/signUp";
-import CheckoutPage from "./pages/checkOut";
+import CheckoutPage from "./pages/CheckOut";
 import Footer from "./components/footer";
 import Header from "./components/header";
 import NotFound from "./pages/NotFoundPage";
