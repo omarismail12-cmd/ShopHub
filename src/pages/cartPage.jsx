@@ -1,6 +1,7 @@
 // pages/CartPage.jsx
 import { useCart } from '../components/CartContext';
-import Footer from '../components/footer';
+import Header from '../components/header';
+import Footer from '../components/Footer';
 import {
   AiFillMinusCircle,
   AiFillPlusCircle,
@@ -19,6 +20,8 @@ export default function CartPage() {
 
   return (
     <div className="flex flex-col min-h-screen">
+      <Header />
+
       <main className="flex-grow bg-gray-50 py-12">
         <div className={`max-w-7xl mx-auto px-4 grid gap-8 ${
           cartItems.length > 0 ? 'grid-cols-1 lg:grid-cols-3' : ''
