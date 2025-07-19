@@ -1,44 +1,78 @@
-import { createContext, useContext, useState, useMemo, useEffect } from "react";
+// components/FavoriteContext.js
+import {
+  createContext,
+  useContext,
+  useState,
+  useMemo,
+  useEffect,
+  useCallback,
+} from "react";
 import PropTypes from "prop-types";
 
 const FavoriteContext = createContext();
 
 export const FavoriteProvider = ({ children }) => {
   const [favorites, setFavorites] = useState(() => {
-    const storedFavorites = localStorage.getItem("favorites");
-    return storedFavorites ? JSON.parse(storedFavorites) : [];
+    try {
+      const storedFavorites = localStorage.getItem("favorites");
+      return storedFavorites ? JSON.parse(storedFavorites) : [];
+    } catch (error) {
+      console.error("Failed to parse favorites from localStorage:", error);
+      return [];
+    }
   });
 
-  const addToFavorites = (item) => {
-    setFavorites((prev) =>
-      prev.some((fav) => fav.id === item.id) ? prev : [...prev, item]
-    );
-  };
+  // Add item to favorites if not already present
+  const addToFavorites = useCallback(
+    (item) => {
+      setFavorites((prev) =>
+        prev.some((fav) => fav.id === item.id) ? prev : [...prev, item]
+      );
+    },
+    [setFavorites]
+  );
 
-  const removeFromFavorites = (id) => {
-    setFavorites((prev) => prev.filter((item) => item.id !== id));
-  };
+  const removeFromFavorites = useCallback(
+    (id) => {
+      setFavorites((prev) => prev.filter((item) => item.id !== id));
+    },
+    [setFavorites]
+  );
 
-  const isFavorited = (id) => favorites.some((item) => item.id === id);
+ 
+  const isFavorited = useCallback(
+    (id) => favorites.some((item) => item.id === id),
+    [favorites]
+  );
 
+  // Persist favorites to localStorage on change
   useEffect(() => {
-    localStorage.setItem("favorites", JSON.stringify(favorites));
+    try {
+      localStorage.setItem("favorites", JSON.stringify(favorites));
+    } catch (error) {
+      console.error("Failed to save favorites to localStorage:", error);
+    }
   }, [favorites]);
 
+  // Optional: Reset favorites (e.g. for sign-out)
+  const clearFavorites = useCallback(() => {
+    setFavorites([]);
+  }, []);
+
+  // Memoize context value to avoid unnecessary re-renders
   const value = useMemo(
     () => ({
       favorites,
       addToFavorites,
       removeFromFavorites,
       isFavorited,
+      clearFavorites,
     }),
-    [favorites]
+    [favorites, addToFavorites, removeFromFavorites, isFavorited, clearFavorites]
   );
 
   return (
-    <FavoriteContext.Provider value={value}>
-      {children}
-    </FavoriteContext.Provider>
+    <FavoriteContext.Provider value={value}>{children}</FavoriteContext.Provider>
   );
 };
 
@@ -46,8 +80,10 @@ FavoriteProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
+// Hook to use the Favorite context
 export const useFavorite = () => {
-  const ctx = useContext(FavoriteContext);
-  if (!ctx) throw new Error("useFavorite must be used within FavoriteProvider");
-  return ctx;
+  const context = useContext(FavoriteContext);
+  if (!context)
+    throw new Error("useFavorite must be used within a FavoriteProvider");
+  return context;
 };

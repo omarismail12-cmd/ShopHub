@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import { LuMapPin } from "react-icons/lu";
 import { MdOutlineMailOutline } from "react-icons/md";
@@ -6,47 +6,48 @@ import { FiPhone } from "react-icons/fi";
 
 const Contact = () => {
   const form = useRef();
+  const [sending, setSending] = useState(false);
 
-  const sendEmail = (e) => {
+  const sendEmail = async (e) => {
     e.preventDefault();
-
     if (!form.current) {
       alert("Form reference not found.");
       return;
     }
 
-    emailjs
-      .sendForm(
+    setSending(true);
+    try {
+      await emailjs.sendForm(
         "service_4icfaac",
         "template_a3lqulf",
         form.current,
         "3IJfpOD0eHNgGiZqJ"
-      )
-      .then(
-        () => {
-          alert("Message sent successfully!");
-          e.target.reset();
-        },
-        (error) => {
-          alert("Failed to send the message, please try again.");
-          console.log(error.text);
-        }
       );
+      alert("Message sent successfully!");
+      form.current.reset();
+    } catch (error) {
+      alert("Failed to send the message, please try again.");
+      console.error("EmailJS error:", error);
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-2 py-8">
-      <h1 className="text-4xl font-bold text-gray-800 mb-6 flex justify-center">
+    <div className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+      <h1 className="text-4xl font-bold text-gray-800 mb-8 flex justify-center">
         Contact Us
       </h1>
 
-      <div className="grid md:grid-cols-2 gap-8">
-        <div className="bg-white p-6 rounded-lg">
-          <h2 className="text-3xl font-semibold text-black mb-4">
-            Get in Touch
-          </h2>
-          <form ref={form} onSubmit={sendEmail}>
-            <div className="mb-4">
+      <div className="grid md:grid-cols-2 gap-12">
+        {/* Contact Form */}
+        <section
+          aria-label="Contact form"
+          className="bg-white p-8 rounded-lg shadow-lg"
+        >
+          <h2 className="text-3xl font-semibold text-black mb-6">Get in Touch</h2>
+          <form ref={form} onSubmit={sendEmail} noValidate>
+            <div className="mb-6">
               <label
                 htmlFor="name"
                 className="block font-semibold text-gray-700 mb-2"
@@ -57,11 +58,18 @@ const Contact = () => {
                 type="text"
                 id="name"
                 name="user_name"
-                className="w-full px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
+                placeholder="Your full name"
+                className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600 transition"
                 required
+                aria-required="true"
+                aria-describedby="name-desc"
               />
+              <p id="name-desc" className="sr-only">
+                Enter your full name
+              </p>
             </div>
-            <div className="mb-4">
+
+            <div className="mb-6">
               <label
                 htmlFor="email"
                 className="block font-semibold text-gray-700 mb-2"
@@ -72,11 +80,18 @@ const Contact = () => {
                 type="email"
                 id="email"
                 name="user_email"
-                className="w-full px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
+                placeholder="you@example.com"
+                className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600 transition"
                 required
+                aria-required="true"
+                aria-describedby="email-desc"
               />
+              <p id="email-desc" className="sr-only">
+                Enter a valid email address
+              </p>
             </div>
-            <div className="mb-4">
+
+            <div className="mb-6">
               <label
                 htmlFor="message"
                 className="block font-semibold text-gray-700 mb-2"
@@ -86,73 +101,81 @@ const Contact = () => {
               <textarea
                 id="message"
                 name="message"
-                rows="4"
-                className="w-full px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
+                rows="5"
+                placeholder="Your message here..."
+                className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600 transition resize-y"
                 required
+                aria-required="true"
+                aria-describedby="message-desc"
               ></textarea>
+              <p id="message-desc" className="sr-only">
+                Enter your message to send us
+              </p>
             </div>
+
             <button
               type="submit"
-              className="bg-blue-600 text-white px-4 w-full py-2 rounded-md hover:bg-blue-700 transition duration-300"
+              disabled={sending}
+              className={`w-full py-3 rounded-md font-semibold text-white transition duration-300 ${
+                sending
+                  ? "bg-blue-400 cursor-not-allowed"
+                  : "bg-blue-600 hover:bg-blue-700"
+              }`}
+              aria-live="polite"
             >
-              Send Message
+              {sending ? "Sending..." : "Send Message"}
             </button>
           </form>
-        </div>
+        </section>
 
-        <div className="space-y-6">
-          <div className="p-6 rounded-lg">
-            <h2 className="text-3xl font-semibold text-black mb-4">
-              Contact Information
-            </h2>
-            <div className="space-y-3">
-              <div>
-                <h3 className="font-medium text-black flex items-center gap-3">
-                  <MdOutlineMailOutline className="text-blue-600" size={30} />{" "}
-                  Email
-                </h3>
-                <p className="text-gray-600 text-lg px-11">
-                  support@shophub.com
-                </p>
+        {/* Contact Information & Business Hours */}
+        <aside className="space-y-10">
+          <section aria-label="Contact information" className="p-8 bg-white rounded-lg shadow-lg">
+            <h2 className="text-3xl font-semibold text-black mb-6">Contact Information</h2>
+            <div className="space-y-6 text-gray-700 text-lg">
+              <div className="flex items-center gap-4">
+                <MdOutlineMailOutline className="text-blue-600" size={32} aria-hidden="true" />
+                <div>
+                  <h3 className="font-medium text-black">Email</h3>
+                  <p>support@shophub.com</p>
+                </div>
               </div>
-              <div>
-                <h3 className="font-medium text-black flex items-center gap-4">
-                  <FiPhone className="text-blue-600" size={30} /> Phone
-                </h3>
-                <p className="text-gray-600 text-lg px-12">(555) 123-4567</p>
+              <div className="flex items-center gap-4">
+                <FiPhone className="text-blue-600" size={32} aria-hidden="true" />
+                <div>
+                  <h3 className="font-medium text-black">Phone</h3>
+                  <p>(555) 123-4567</p>
+                </div>
               </div>
-              <div>
-                <h3 className="font-medium text-black flex items-center gap-4">
-                  <LuMapPin className="text-blue-600" size={30} /> Address
-                </h3>
-                <p className="text-gray-600 text-lg px-12">
-                  123 Shop Street
-                  <br />
-                  City, Country
-                </p>
+              <div className="flex items-center gap-4">
+                <LuMapPin className="text-blue-600" size={32} aria-hidden="true" />
+                <div>
+                  <h3 className="font-medium text-black">Address</h3>
+                  <address className="not-italic">
+                    123 Shop Street
+                    <br />
+                    City, Country
+                  </address>
+                </div>
               </div>
             </div>
-          </div>
+          </section>
 
-          <div className="p-6 rounded-lg">
-            <h2 className="text-3xl font-semibold text-black mb-4">
-              Business Hours
-            </h2>
-            <ul className="space-y-2 text-black">
+          <section aria-label="Business hours" className="p-8 bg-white rounded-lg shadow-lg">
+            <h2 className="text-3xl font-semibold text-black mb-6">Business Hours</h2>
+            <ul className="space-y-3 text-gray-800 text-lg">
               <li>
-                <span className="font-semibold">Monday - Friday:</span> 9:00 AM
-                - 6:00 PM
+                <strong>Monday - Friday:</strong> 9:00 AM - 6:00 PM
               </li>
               <li>
-                <span className="font-semibold">Saturday:</span> 10:00 AM - 4:00
-                PM
+                <strong>Saturday:</strong> 10:00 AM - 4:00 PM
               </li>
               <li>
-                <span className="font-semibold">Sunday:</span> Closed
+                <strong>Sunday:</strong> Closed
               </li>
             </ul>
-          </div>
-        </div>
+          </section>
+        </aside>
       </div>
     </div>
   );

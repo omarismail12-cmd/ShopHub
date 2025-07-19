@@ -17,9 +17,11 @@ export default function AllProductsPage() {
   const { addToFavorites, removeFromFavorites, isFavorited } = useFavorite();
 
   useEffect(() => {
-    const handler = debounce(() => setSearch(searchInput), 300);
-    handler();
-    return () => handler.cancel();
+    const handler = debounce((value) => setSearch(value), 300);
+    handler(searchInput);
+    return () => {
+      handler.cancel();
+    };
   }, [searchInput]);
 
   const isInCart = (id) => cartItems.some((item) => item.id === id);
@@ -61,9 +63,9 @@ export default function AllProductsPage() {
               className="w-full border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition"
             >
               <option value="">All</option>
-              <option value="electronics">Electronics</option>
-              <option value="clothing">Clothing</option>
-              <option value="books">Books</option>
+              <option value="Electronics">Electronics</option>
+              <option value="Accessories">Accessories</option>
+              <option value="Sports">Sports</option>
             </select>
           </div>
 

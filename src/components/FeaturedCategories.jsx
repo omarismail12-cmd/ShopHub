@@ -1,21 +1,19 @@
-/* eslint-disable no-unused-vars */
-import React from "react";
 import { Link } from "react-router-dom";
 const categories = [
   {
     title: " Electronics",
-    image: "./src/assets/images/electronics.jpg",
-    link: "/electronics",
+    image: "/src/assets/images/electronics.jpg",
+   
   },
   {
     title: " Fashion",
-    image: "./src/assets/images/fashion.jpg",
-    link: "/fashion",
+    image: "/src/assets/images/fashion.jpg",
+    
   },
   {
     title: " Home & Living",
-    image: "./src/assets/images/home f.jpg",
-    link: "/home-living",
+    image: "/src/assets/images/home f.jpg",
+   
   },
 ];
 const FeaturedCategories = () => {
@@ -45,7 +43,7 @@ const FeaturedCategories = () => {
           ))}
         </div>
       </div>
-    </Link>
+     </Link>
   );
 };
 
